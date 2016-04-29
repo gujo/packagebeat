@@ -60,6 +60,7 @@ func (pb *Packagebeat) collectPackages(manager string, cmd string, args ...strin
 	now := common.Time(time.Now())
 	x := exec.Command(cmd, args...)
 	output, err := x.StdoutPipe()
+	defer x.Wait()
 	if err != nil {
 		logp.Err("%v", err)
 		return err
